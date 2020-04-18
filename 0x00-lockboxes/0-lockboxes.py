@@ -4,6 +4,10 @@
 
 
 def canUnlockAll(boxes):
+    """
+    Unlock all boxes
+    boxes: list with another lists inside that contein keys
+    """
     box_key = [0]
     max_boxes = len(boxes)
     counter = 0
