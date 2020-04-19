@@ -24,7 +24,6 @@ def canUnlockAll(boxes):
                                 break
                         if(flag == 0):
                             box_key.append(boxes[box_key[counter]][x])
-                            print(box_key)
                 counter = counter + 1
             else:
                 break
