@@ -13,18 +13,15 @@ def canUnlockAll(boxes):
     counter = 0
     if(boxes):
         while(counter != max_boxes):
-            if(len(boxes[box_key[counter]]) > 0):
-                for x in range(0, len(boxes[box_key[counter]])):
-                    if(max_boxes > boxes[box_key[counter]][x]):
-                        for check in box_key:
-                            if(check != boxes[box_key[counter]][x]):
-                                flag = 0
-                            else:
-                                flag = 1
-                                break
-                        if(flag == 0):
-                            box_key.append(boxes[box_key[counter]][x])
-                counter = counter + 1
+            if(len(box_key) > counter):
+                if(len(boxes[box_key[counter]]) > 0):
+                    for x in range(0, len(boxes[box_key[counter]])):
+                        if(boxes[box_key[counter]][x] not in box_key):
+                            if(max_boxes > boxes[box_key[counter]][x]):
+                                box_key.append(boxes[box_key[counter]][x])
+                    counter = counter + 1
+                else:
+                    break
             else:
                 break
     if len(box_key) == max_boxes:
