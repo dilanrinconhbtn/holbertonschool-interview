@@ -3,9 +3,16 @@
 #include <stdio.h>
 #include "lists.h"
 
+/**
+ * insert_node - Print elements of a linked list
+ * @head: pointer to head
+ * @number: new node
+ * Return: new node position
+ */
+
 listint_t *insert_node(listint_t **head, int number)
 {
-    listint_t *node, *tmp;
+        listint_t *node, *tmp;
 
 	node = malloc(sizeof(listint_t));
 	if (node == NULL)
