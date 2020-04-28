@@ -1,33 +1,21 @@
 #!/usr/bin/python3
-""" Unlock the boxes
-"""
+""" This program checks if all boxes can be opened """
+
+
+def checkBox(index, key, boxes):
+    """ This method determines if all boxes can be opened  """
+    return (key in boxes[index] and key != index)
 
 
 def canUnlockAll(boxes):
-    """
-    Unlock all boxes
-    boxes: list with another lists inside that contein keys
-    """
-    box_key = [0]
-    max_boxes = len(boxes)
-    counter = 0
-    if(boxes):
-        while(counter != max_boxes):
-            if(len(boxes[box_key[counter]]) > 0):
-                for x in range(0, len(boxes[box_key[counter]])):
-                    if(max_boxes > boxes[box_key[counter]][x]):
-                        for check in box_key:
-                            if(check != boxes[box_key[counter]][x]):
-                                flag = 0
-                            else:
-                                flag = 1
-                                break
-                        if(flag == 0):
-                            box_key.append(boxes[box_key[counter]][x])
-                counter = counter + 1
-            else:
+    """ This method determines if all boxes can be opened """
+
+    for key in range(1, len(boxes) - 1):
+        flag = False
+        for index in range(len(boxes)):
+            flag = checkBox(index, key, boxes)
+            if flag:
                 break
-    if len(box_key) == max_boxes:
-        return True
-    else:
-        return False
+        if flag is False:
+            return flag
+    return True
