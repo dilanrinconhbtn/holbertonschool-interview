@@ -3,6 +3,7 @@
 Operations file for logic
 """
 
+
 def minOperations(n):
     copy = 0
     count = 0
