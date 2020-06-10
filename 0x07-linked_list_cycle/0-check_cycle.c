@@ -6,19 +6,19 @@
  */
 int check_cycle(listint_t *list)
 {
-	listint_t *tortoise, *hare;
+	listint_t *list1, *list2;
 
 	if (list == NULL || list->next == NULL)
 		return (0);
 
-	tortoise = hare = list;
+	list1 = list2 = list;
 
-	while (tortoise && hare && hare->next)
+	while (list1 && list2 && list2->next)
 	{
-		tortoise = tortoise->next;
-		hare = hare->next->next;
+		list1 = list1->next;
+		list2 = list2->next->next;
 
-		if (hare == tortoise)
+		if (list2 == list1)
 			return (1);
 	}
 
