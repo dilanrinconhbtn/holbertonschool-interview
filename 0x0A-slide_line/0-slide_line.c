@@ -1,52 +1,52 @@
 #include "slide_line.h"
+#include <stdlib.h>
+
 /**
- * slide_left - slide or colapse the line to the left
- * @line: pointer to array.
- * @size: size of the array
+ * left - Move the direction to the left
+ *
+ * @line: points to an array of integers containing size elements
+ * @size: Number of elements in @array
  */
-void slide_left(int *line, size_t size)
+
+void left(int *line, size_t size)
 {
 	size_t i, j, k;
 
-	for (i = 0, j = 0; i < size; i++, j++)
+	for (i = 0, j = 0; i < size;)
 	{
 		if (line[i] == 0)
-			while (line[i] == 0)
-				i++;
-
+			for (; line[i] == 0; i++);
+		if (i == (size - 1))
+			break;
 		j = i + 1;
-
 		if (line[j] == 0)
-			while (line[j] == 0)
-				j++;
-
+			for (; line[j] == 0; j++);
 		if (line[i] == line[j])
 		{
-			line[i] = line[i] * 2;
+			line[i] = line[i] + line[j];
 			line[j] = 0;
 			i = j + 1;
 		}
 		else
 			i++;
-
 		j = 0;
 	}
-
 	for (i = 0, k = 0; i < size; i++)
 		if (line[i] != 0)
 			line[k++] = line[i];
-
 	while (k < size)
 		line[k++] = 0;
 }
 
 
 /**
- * slide_right - slide or colapse the line to the left.
- * @line: pointer to array
- * @size: size of the array
+ * right - Move the direction to the left
+ *
+ * @line: points to an array of integers containing size elements
+ * @size: Number of elements in @array
  */
-void slide_right(int *line, size_t size)
+
+void right(int *line, size_t size)
 {
 	size_t i, j;
 
@@ -58,11 +58,10 @@ void slide_right(int *line, size_t size)
 			{
 				if (line[i - 1] == line[j - 1])
 				{
-					line[i - 1] = line[i - 1] * 2;
+					line[i - 1] = line[i - 1] + line[j - 1];
 					line[j - 1] = 0;
 					break;
 				}
-
 				if (line[i - 1] != line[j - 1] &&
 				    line[j - 1] != 0)
 					break;
@@ -81,21 +80,23 @@ void slide_right(int *line, size_t size)
 	}
 }
 
+
 /**
- * slide_line - slides and merges an array of integers.
- * @line: pointer to the line to slide.
- * @size: size of line.
- * @direction: SLIDE_LEFT slide to the left the line.
- * SLIDE_RIGHT slide to the right the line
- * Return: 1 upon success, or 0 upon failure.
+ * slide_line - Slide and merge lines
+ *
+ * @line: points to an array of integers containing size elements
+ * @size: Number of elements in @array
+ * @direction: Number of elements in @array
+ * Return: Number of elements in 1
  */
+
 int slide_line(int *line, size_t size, int direction)
 {
 	if (direction != SLIDE_LEFT && direction != SLIDE_RIGHT)
 		return (0);
 	if (direction == 0)
-		slide_left(line, size);
+		left(line, size);
 	if (direction == 1)
-		slide_right(line, size);
+		right(line, size);
 	return (1);
 }
