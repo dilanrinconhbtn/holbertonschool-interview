@@ -1,20 +1,20 @@
 #!/usr/bin/python3
-"""
-Log Parsing
-"""
+"""Log Parse"""
+import sys
+
 import sys
 
 counter = 1
 sum_size = 0
 
-status_dir = {'200': 0,
-              '301': 0,
-              '400': 0,
-              '401': 0,
-              '403': 0,
-              '404': 0,
-              '405': 0,
-              '500': 0}
+code = {'200': 0,
+        '301': 0,
+        '400': 0,
+        '401': 0,
+        '403': 0,
+        '404': 0,
+        '405': 0,
+        '500': 0}
 
 try:
     for line in sys.stdin:
@@ -23,17 +23,15 @@ try:
         if len(ln) > 2:
             status = ln[-2]
             size = int(ln[-1])
-            # print("Status: {}, Size: {}".format(status, size))
-
             sum_size += size
-            if status in status_dir:
-                status_dir[status] += 1
+            if status in code:
+                code[status] += 1
 
         if counter % 10 == 0:
             print("File size: {}".format(sum_size))
-            for key in sorted(status_dir.keys()):
-                if status_dir[key] != 0:
-                    print("{}: {}".format(key, status_dir[key]))
+            for key in sorted(code.keys()):
+                if code[key] != 0:
+                    print("{}: {}".format(key, code[key]))
 
         counter += 1
 
@@ -42,6 +40,6 @@ except Exception:
 
 finally:
     print("File size: {}".format(sum_size))
-    for key in sorted(status_dir.keys()):
-        if status_dir[key] != 0:
-            print("{}: {}".format(key, status_dir[key]))
+    for key in sorted(code.keys()):
+        if code[key] != 0:
+            print("{}: {}".format(key, code[key]))
